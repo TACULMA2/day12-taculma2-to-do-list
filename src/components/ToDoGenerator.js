@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Space } from 'antd';
+import { Button, Input, Space, message } from 'antd';
 import { useDispatch } from "react-redux";
 import { addTodo } from '../components/ToDoReducer';
 import { v4 as uuidv4} from 'uuid';
@@ -10,8 +10,12 @@ const ToDoGenerator = (props) => {
     const [inputValue, setInputValue] = useState("");
     
     const addTodoItem = () => {
-        dispatch(addTodo({text: inputValue, id: uuidv4(), done: false}));
-        setInputValue("");
+        if (inputValue.trim() !== "") {
+            dispatch(addTodo({text: inputValue, id: uuidv4(), done: false}));
+            setInputValue("");
+        } else {
+            message.error("Blank is not accepted. Please input a proper value.");
+        }
     }
 
     return (
