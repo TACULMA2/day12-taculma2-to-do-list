@@ -1,4 +1,5 @@
-import { List, Typography } from 'antd';
+import { List, Typography, Button } from 'antd';
+import { CloseCircleTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { toggleTodo } from '../components/ToDoReducer';
 
@@ -16,7 +17,8 @@ const ToDoGroup= (props) => {
                 dataSource={props.todoListItems}
                 renderItem={(item) => (
                 <List.Item onClick={() => handleToggle(item.id)} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                <Typography.Text mark>{item.done ? 'done' : 'not done'}</Typography.Text> {item.text}
+                    <div style={{ flex: 1 }}>{item.text}</div>
+                    <Button type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
                 </List.Item>
                 )}
             />          
