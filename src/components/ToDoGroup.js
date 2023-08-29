@@ -22,8 +22,8 @@ const ToDoGroup= (props) => {
                 renderItem={(item) => (
                 <List.Item onClick={() => handleToggle(item.id)} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                     <div style={{ flex: 1 }}>{item.text}</div>
-                    <Button onClick={() => handleDelete(item.id)} type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
                     <Popconfirm title="Are you sure to delete this todo?" onConfirm={() => handleDelete(item.id)} okText="Yes" cancelText="No">
+                    <Button type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
                     </Popconfirm>
                 </List.Item>
                 )}
