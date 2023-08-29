@@ -1,13 +1,17 @@
-import { List, Typography, Button } from 'antd';
+import { List, Button, Popconfirm } from 'antd';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { toggleTodo } from '../components/ToDoReducer';
+import { toggleTodo, deleteTodo } from '../components/ToDoReducer';
 
 const ToDoGroup= (props) => {
     const dispatch = useDispatch();
 
     const handleToggle = (id) => {
         dispatch(toggleTodo(id));
+      };
+
+      const handleDelete = (id) => {
+        dispatch(deleteTodo(id));
       };
 
     return (
@@ -18,7 +22,9 @@ const ToDoGroup= (props) => {
                 renderItem={(item) => (
                 <List.Item onClick={() => handleToggle(item.id)} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
                     <div style={{ flex: 1 }}>{item.text}</div>
-                    <Button type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
+                    <Button onClick={() => handleDelete(item.id)} type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
+                    <Popconfirm title="Are you sure to delete this todo?" onConfirm={() => handleDelete(item.id)} okText="Yes" cancelText="No">
+                    </Popconfirm>
                 </List.Item>
                 )}
             />          

@@ -12,9 +12,14 @@ const todoSlice = createSlice({
           const todo = state.find((item) => item.id === action.payload);
           if (todo) {
             todo.done = !todo.done;
+            console.log(`Toggled 'done' property for item with ID ${action.payload}. New state:`, state);
           }
-    }
-}});
+       },
+       deleteTodo: (state, action) => {
+         return state.filter((item) => item.id !== action.payload);
+       },
+     },
+});
 
-export const { addTodo, toggleTodo } = todoSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
 export default todoSlice.reducer;
