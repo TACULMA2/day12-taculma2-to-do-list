@@ -20,12 +20,14 @@ const ToDoGroup= (props) => {
                 bordered
                 dataSource={props.todoListItems}
                 renderItem={(item) => (
-                <List.Item onClick={() => handleToggle(item.id)} style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
-                    <div style={{ flex: 1 }}>{item.text}</div>
+                    <List.Item style={{ textDecoration: item.done ? 'line-through' : 'none' }}>
+                    <div onClick={() => handleToggle(item.id)} style={{ flex: 1, cursor: 'pointer' }}>
+                      {item.text}
+                    </div>
                     <Popconfirm title="Are you sure to delete this todo?" onConfirm={() => handleDelete(item.id)} okText="Yes" cancelText="No">
-                    <Button type="primary" shape="circle" icon={<CloseCircleTwoTone/>} />
+                      <Button type="primary" shape="circle" icon={<CloseCircleTwoTone />} />
                     </Popconfirm>
-                </List.Item>
+                  </List.Item>
                 )}
             />          
         </div>
