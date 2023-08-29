@@ -5,7 +5,7 @@ import { addTodo } from '../components/ToDoReducer';
 import { v4 as uuidv4} from 'uuid';
 
 
-const ToDoGenerator = (props) => {
+const ToDoGenerator = () => {
     const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState("");
     
