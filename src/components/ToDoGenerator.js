@@ -18,10 +18,16 @@ const ToDoGenerator = () => {
         }
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            addTodoItem();
+        }
+    }
+
     return (
         <div>
             <Space.Compact>
-                <Input value={inputValue} onChange={event => setInputValue(event.target.value)} />
+                <Input value={inputValue} onChange={event => setInputValue(event.target.value)} onKeyDown={handleKeyDown}/>
                 <Button onClick={addTodoItem} type="primary">Add</Button>
             </Space.Compact>
         </div>
