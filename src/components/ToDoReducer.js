@@ -20,10 +20,12 @@ const todoReducer = createSlice({
          return state.filter((item) => item.id !== action.payload);
        },
        updateTodo: (state, action) => {
-        return state.put((item) => item.id == action.payload);
-      },
+        const todoToUpdate = state.find(item => item.id === action.payload.id);
+        if (todoToUpdate) {
+            todoToUpdate.text = action.payload.text;
+        }
      },
-});
+}});
 
 export const { resetTodo, addTodo, toggleTodo, deleteTodo, updateTodo } = todoReducer.actions;
 export default todoReducer.reducer;

@@ -1,4 +1,4 @@
-import { List, Button, Popconfirm, Modal } from 'antd';
+import { List, Button, Popconfirm, Modal, Input } from 'antd';
 import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { toggleTodo, deleteTodo, updateTodo } from '../components/ToDoReducer';
@@ -7,8 +7,9 @@ import { useState } from 'react';
 
 const ToDoGroup= (props) => {
     const dispatch = useDispatch();
-    const [showDetail, setShowDetail] = useState(false);
-    const [selectedTodo, setSelectedTodo] = useState(null);
+    const [showUpdate, setShowUpdate] = useState(false);
+    const [updatingTodo, setUpdatingTodo] = useState(null);
+    const [updatedText, setUpdatedText] = useState('');
 
     const handleToggle = (id) => {
       if(props.isDone) {
@@ -27,12 +28,19 @@ const ToDoGroup= (props) => {
       };
 
       const handleUpdate = (id) => {
-        dispatch(updateTodo(id));
+        dispatch(updateTodo({id, text: updatedText}));
+        setShowUpdate(false);
       }
 
-      const handleCloseDetail = () => {
-        setSelectedTodo(null);
-        setShowDetail(false);
+      const handleOpenUpdateModal = (todoItem) => {
+        setUpdatingTodo(todoItem);
+        setUpdatedText(todoItem.text);
+        setShowUpdate(true);
+    };
+
+      const handleCloseUpdateModal = () => {
+        setUpdatingTodo(null);
+        setShowUpdate(false);
     };
       
     return  (
@@ -45,25 +53,29 @@ const ToDoGroup= (props) => {
                         <div onClick={() => handleToggle(item.id)} style={{ flex: 1, cursor: 'pointer' }}>
                             <span>{item.text}</span>
                         </div>
-                        <Button shape="circle" icon={< DeleteOutlined/>} />
-                        <Modal>
-                        title= "Update The Item"
-                        visible={showDetail}
-                        onCancel={handleCloseDetail}
-                        <Button key="update" onClick={handleCloseDetail}>
-                        Update
-                        </Button>,
-                        <Button key="back" onClick={handleCloseDetail}>
-                        Go back
-                        </Button>,
-                        </Modal>
-
+                        <Button shape="circle" icon={< DeleteOutlined/>} onClick={() => handleOpenUpdateModal(item)}/>
                         <Popconfirm title="Are you sure to delete this todo?" onConfirm={() => handleDelete(item.id)} okText="Yes" cancelText="No">
                             <Button shape="circle" icon={<CloseCircleOutlined />} />
                         </Popconfirm>
                     </List.Item>
-                )}
-            />
+          )}
+       />
+                        <Modal
+                        title= "Update The Item"
+                        visible={showUpdate}
+                        onCancel={handleCloseUpdateModal}
+                        footer={[
+                    <Button key="back" onClick={handleCloseUpdateModal}>
+                        Go back
+                    </Button>,
+                    <Button key="update" type="primary" onClick={() => handleUpdate(updatingTodo.id)}>
+                        Update
+                    </Button>,
+                        ]} > <Input value={updatedText} onChange={(e) => setUpdatedText(e.target.value)} />
+                        </Modal>
+
+                        
+
         </div>
     );
 }
