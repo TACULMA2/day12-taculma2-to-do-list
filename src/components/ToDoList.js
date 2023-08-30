@@ -7,7 +7,6 @@ import { resetTodo } from './ToDoReducer';
 
 const TodoList = (props) => {
     const todosList = useSelector((state) => state.todos);
-    const doneList = todosList.filter(todo => todo.done);
     const dispatch = useDispatch();
 
   //   useEffect(() => {
@@ -21,7 +20,7 @@ const TodoList = (props) => {
     return (
       <>
       <h1>Todo List</h1>
-      <ToDoGroup todoListItems={props.isDone ? doneList : todosList} />
+      <ToDoGroup todoListItems={todosList} />
           <ToDoGenerator />
     </>
     );

@@ -4,9 +4,9 @@ const todoSlice = createSlice({
     name:'todos',
     initialState: [],
     reducers: {
-    //   resetTodo: (state, action) => {
-    //     state = (action.payload)
-    //   },
+      resetTodo: (state, action) => {
+        state = (action.payload)
+      },
         addTodo: (state, action) => {
             state.push(action.payload)
         },
@@ -22,5 +22,5 @@ const todoSlice = createSlice({
      },
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo, resetTodo } = todoSlice.actions;
 export default todoSlice.reducer;
