@@ -3,19 +3,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import ToDoGroup from './ToDoGroup';
 import ToDoGenerator from './ToDoGenerator';
 import * as todoApi from '../api/todoApi';
-import { resetTodo } from './ToDoReducer'; 
+import { resetTodo } from './toDoReducer'; 
+import { useTodo } from '../hooks/useToDo';
 
 const TodoList = (props) => {
+  const {loadTodos} = useTodo();
     const todosList = useSelector((state) => state.todos);
     const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       todoApi.getTodoTasks().then( response => 
-  //       dispatch(resetTodo(response.data)));
-  //     }
-  //     fetchData();
-  // }, []);
+    useEffect(() => {
+
+      loadTodos();
+  
+    }, []);
+    console.log("todosList in TodoList:", todosList);
   
     return (
       <>

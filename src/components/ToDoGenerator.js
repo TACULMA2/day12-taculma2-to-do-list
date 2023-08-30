@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Input, Space, message } from 'antd';
 import { useDispatch } from "react-redux";
-import { addTodo } from '../components/ToDoReducer';
+import { addTodo } from './toDoReducer';
 import { v4 as uuidv4} from 'uuid';
 import '../ToDoGenerator.css';
 
@@ -24,7 +24,7 @@ const ToDoGenerator = () => {
             addTodoItem();
         }
     }
-
+    console.log("props.todoListItems in ToDoGenerator:", inputValue);
     return (
         <div>
             <Space.Compact>

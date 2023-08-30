@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const todoReducer = createSlice({
     name:'todos',
-    initialState: [],
-        reducers: {
+    initialState: {
+      todos:[],
+    },
+    reducers: {
       resetTodo: (state, action) => {
-        state = (action.payload)
+        state.todos = (action.payload)
       },
         addTodo: (state, action) => {
             state.push(action.payload)

@@ -1,7 +1,7 @@
 import { List, Button, Popconfirm, Modal } from 'antd';
 import { CloseCircleTwoTone } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../components/ToDoReducer';
+import { toggleTodo, deleteTodo } from './toDoReducer';
 import * as todoApi from '../api/todoApi';
 import ToDoItemDetail from './ToDoItemDetail';
 import { useState } from 'react';
@@ -47,7 +47,7 @@ const DoneGroup= (props) => {
             {/* )} */}
             <Modal
                 title="Todo Item Detail"
-                visible={showDetail}
+                open={showDetail}
                 onCancel={handleCloseDetail}
                 footer={[
                     <Button key="back" onClick={handleCloseDetail}>

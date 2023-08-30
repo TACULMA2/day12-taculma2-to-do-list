@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ToDoGroup from './ToDoGroup';
 import ToDoGenerator from './ToDoGenerator';
 import * as todoApi from '../api/todoApi';
-import { resetTodo } from './ToDoReducer'; 
+import { resetTodo } from './toDoReducer'; 
 import DoneGroup from './DoneGroup';
 
 const DoneList = (props) => {
