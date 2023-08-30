@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const ToDoItemDetail = () => {
-    const todoTask =  useSelector(state => state.todo.tasks.find(task =>task.id === id));
-    const { id } = useParams();
+const ToDoItemDetail = ({todoItem}) => {
+    // const todosList = useSelector((state) => state.todos);
+    // const { id } = useParams();
 
+    // const todoItem = todosList.find(item => item.id === id);
+    if (!todoItem) {
+        return <div>No item selected</div>;
+    }
     return(
         <div className = "todo-detail">
-            <h1>Todo Item Detail</h1>
-            <div>{todoTask?.id}</div>
-            <div>{todoTask?.text}</div>
+            <div>{todoItem.id}</div>
+            <div>{todoItem.text}</div>
         </div>
     )
 

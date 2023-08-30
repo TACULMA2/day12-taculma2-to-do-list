@@ -1,6 +1,6 @@
-const ToDoItem = (props) => {
+const ToDoItem = ({item}) => {
     return (
-        <div>{props.item.text}</div>
+        <div>{item.text}</div>
     );
 }
 
