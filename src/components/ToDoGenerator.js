@@ -29,7 +29,7 @@ const ToDoGenerator = () => {
         <div>
             <Space.Compact>
                 <Input value={inputValue} onChange={event => setInputValue(event.target.value)} onKeyDown={handleKeyDown}/>
-                <Button onClick={addTodoItem} type="primary">Add</Button>
+                <Button onClick={addTodoItem} >Add</Button>
             </Space.Compact>
         </div>
     );

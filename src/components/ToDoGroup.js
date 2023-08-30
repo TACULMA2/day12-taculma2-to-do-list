@@ -1,11 +1,14 @@
-import { List, Button, Popconfirm } from 'antd';
-import { CloseCircleTwoTone } from '@ant-design/icons';
+import { List, Button, Popconfirm, Modal } from 'antd';
+import { CloseCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../components/ToDoReducer';
+import { toggleTodo, deleteTodo, updateTodo } from '../components/ToDoReducer';
 import * as todoApi from '../api/todoApi';
+import { useState } from 'react';
 
 const ToDoGroup= (props) => {
     const dispatch = useDispatch();
+    const [showDetail, setShowDetail] = useState(false);
+    const [selectedTodo, setSelectedTodo] = useState(null);
 
     const handleToggle = (id) => {
       if(props.isDone) {
@@ -22,6 +25,15 @@ const ToDoGroup= (props) => {
       const handleDelete = (id) => {
         dispatch(deleteTodo(id));
       };
+
+      const handleUpdate = (id) => {
+        dispatch(updateTodo(id));
+      }
+
+      const handleCloseDetail = () => {
+        setSelectedTodo(null);
+        setShowDetail(false);
+    };
       
     return  (
       <div>
@@ -33,8 +45,21 @@ const ToDoGroup= (props) => {
                         <div onClick={() => handleToggle(item.id)} style={{ flex: 1, cursor: 'pointer' }}>
                             <span>{item.text}</span>
                         </div>
+                        <Button shape="circle" icon={< DeleteOutlined/>} />
+                        <Modal>
+                        title= "Update The Item"
+                        visible={showDetail}
+                        onCancel={handleCloseDetail}
+                        <Button key="update" onClick={handleCloseDetail}>
+                        Update
+                        </Button>,
+                        <Button key="back" onClick={handleCloseDetail}>
+                        Go back
+                        </Button>,
+                        </Modal>
+
                         <Popconfirm title="Are you sure to delete this todo?" onConfirm={() => handleDelete(item.id)} okText="Yes" cancelText="No">
-                            <Button type="primary" shape="circle" icon={<CloseCircleTwoTone />} />
+                            <Button shape="circle" icon={<CloseCircleOutlined />} />
                         </Popconfirm>
                     </List.Item>
                 )}
