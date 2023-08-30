@@ -20,16 +20,15 @@ export const useTodo = () => {
         loadTodos();
       };
 
-      return {loadTodos, addTodo, deleteTodo};
+        const toggleTodo = async (id, done) => {
+        await todoApi.updateTodoTask(id,{done});
+        loadTodos();
+      };
+
+      return {loadTodos, addTodo, deleteTodo, toggleTodo };
 
     };
     
-
-    
-//       const toggleTodo = async (id, todoListItems) => {
-//         await todoApi.updateTodoTask(id,todoListItems);
-//         loadTodos();
-//       };
     
 //       const updateTodo = async (id,todoListItems) => {
 //         await todoApi.updateTodoTask(id, todoListItems);

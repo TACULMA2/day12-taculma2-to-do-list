@@ -8,22 +8,13 @@ import { useTodo } from '../hooks/useToDo';
 
 const ToDoGroup= (props) => {
     const dispatch = useDispatch();
-    const { deleteTodo } = useTodo();
+    const { deleteTodo, toggleTodo } = useTodo();
     const [showUpdate, setShowUpdate] = useState(false);
     const [updatingTodo, setUpdatingTodo] = useState(null);
     const [updatedText, setUpdatedText] = useState('');
 
-    const handleToggle = (id) => {
-      if(props.isDone) {
-        console.log("go to the detail page");
-      }else{
-        // async
-        // await todoApi.getTodoTasks(props.id, {done: !props.task.done});
-        // const response = todoApi.getTodoTasks();
-        // dispatch(updateTodoTask(response.data));
-        dispatch(toggleTodo(id));
-        console.log(toggleTodo(id));
-      }
+    const handleToggle = async (id, done) => {
+      await toggleTodo(id, done);
       };
 
       const handleDelete = async (id) => {
@@ -54,8 +45,11 @@ const ToDoGroup= (props) => {
                 bordered
                 dataSource={props.todoListItems.todos}
                 renderItem={(item) => (
-                    <List.Item style={{ textDecoration: item.done ? 'line-through' : 'none' }} todoItem={item} key={item.id} isDone={props.isDone}>
-                        <div onClick={() => handleToggle(item.id)} style={{ flex: 1, cursor: 'pointer' }}>
+                    <List.Item style={{ textDecoration: item.done ? 'line-through' : 'none' }}
+                    todoItem={item}
+                    key={item.id}
+                    isDone={props.isDone} >
+                        <div onClick={() => handleToggle(item.id, !item.done)} style={{ flex: 1, cursor: 'pointer' }}>
                             <span>{item.text}</span>
                             <span> </span>
                         </div>
