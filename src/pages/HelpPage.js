@@ -1,3 +1,4 @@
+// import './HelpPage.css'
 export default function HelpPage() {
     return (
         <div>

@@ -1,6 +1,6 @@
 const ToDoItem = (props) => {
     return (
-        <div>{props.input}</div>
+        <div>{props.item.text}</div>
     );
 }
 
