@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { toggleTodo, deleteTodo, updateTodo, resetTodo } from './toDoReducer';
 import * as todoApi from '../api/todoApi';
 import { useState } from 'react';
-// import { useTodo } from '../hooks/useToDo';
+import { useTodo } from '../hooks/useToDo';
 
 const ToDoGroup= (props) => {
     const dispatch = useDispatch();
-    // const {toggleTodo, deleteTodo, updateTodo, loadTodos } = useTodo();
+    const { deleteTodo } = useTodo();
     const [showUpdate, setShowUpdate] = useState(false);
     const [updatingTodo, setUpdatingTodo] = useState(null);
     const [updatedText, setUpdatedText] = useState('');
@@ -26,8 +26,8 @@ const ToDoGroup= (props) => {
       }
       };
 
-      const handleDelete = (id) => {
-        dispatch(deleteTodo(id));
+      const handleDelete = async (id) => {
+        await deleteTodo(id);
       };
 
       const handleUpdate = (id) => {
